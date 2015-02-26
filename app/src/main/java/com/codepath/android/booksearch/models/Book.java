@@ -6,12 +6,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Book {
+public class Book implements Serializable {
     private String openLibraryId;
     private String author;
     private String title;
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    private String isbn;
 
     public String getOpenLibraryId() {
         return openLibraryId;
@@ -49,6 +57,7 @@ public class Book {
             }
             book.title = jsonObject.has("title_suggest") ? jsonObject.getString("title_suggest") : "";
             book.author = getAuthor(jsonObject);
+            book.isbn = jsonObject.getJSONArray("isbn").getString(0);
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
@@ -92,4 +101,6 @@ public class Book {
         }
         return books;
     }
+
+
 }

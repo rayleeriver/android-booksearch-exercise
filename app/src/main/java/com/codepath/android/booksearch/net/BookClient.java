@@ -27,4 +27,10 @@ public class BookClient {
             e.printStackTrace();
         }
     }
+
+    // https://openlibrary.org/api/books?bibkeys=ISBN:9780980200447&jscmd=data&format=json
+    public void getBook(final String isbn, JsonHttpResponseHandler handler) {
+        String url = getApiUrl("api/books?bibkeys=ISBN:" + isbn + "&jscmd=data&format=json");
+        client.get(url, handler);
+    }
 }
